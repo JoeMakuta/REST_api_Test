@@ -14,3 +14,6 @@ app.use("/", (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log("Server running on port " + PORT);
 });
+
+
+export default app
