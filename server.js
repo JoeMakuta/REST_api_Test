@@ -7,7 +7,18 @@ import product_router from "./routes/products/products.js";
 
 dotenv.config();
 const app = express();
-const { PORT } = process.env;
+const { PORT, DBURI } = process.env;
+
+//DB connection
+
+mongoose
+  .connect(DBURI)
+  .then(() => {
+    console.log("Db connexion succeded");
+  })
+  .catch(() => {
+    console.log("An error occured while trying to connect to db");
+  });
 
 app.use("/admin", admin_router);
 app.use("/product", product_router);
