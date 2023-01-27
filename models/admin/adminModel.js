@@ -9,4 +9,5 @@ const adminSchema = mongoose.Schema(
   { collection: "admin-data" }
 );
 
-export default adminModel = mongoose.Model("adminModel", adminSchema);
+const adminModel = mongoose.model("adminModel", adminSchema);
+export default adminModel;
