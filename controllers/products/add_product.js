@@ -1,29 +1,32 @@
-import AdminModel from "../../models/admin/adminModel.js";
+import ProductModel from "../../models/products/productModel";
 
-const signUp = (req, res) => {
-  AdminModel.findOne({ userEmail: req.body.userEmail }).then((user) => {
-    if (user) {
-      console.log("User exist");
-      res.status(403).json({ message: "User exists" });
-    } else {
-      console.log("User does not exist yet");
-      const admin = new AdminModel({
-        userName: req.body.userName,
-        userEmail: req.body.userEmail,
-        passWord: req.body.passWord,
-      });
-      admin
-        .save()
-        .then(() => {
-          console.log("User saved");
-          res.status(200).json({ message: "User saved" });
-        })
-        .catch(() => {
-          console.log("An error occured when trying to save the user");
-          res.status(500).json({ message: "Error server" });
+const addProduct = (req, res) => {
+  ProductModel.findOne({ productName: req.body.productName }).then(
+    (product) => {
+      if (product) {
+        console.log("Product exists");
+        res.status(403).json({ message: "Product exists" });
+      } else {
+        console.log("Product does not exist yet");
+        const admin = new ProductModel({
+          productName: req.body.productName,
+          productId: req.body.productId,
+          productDescription: req.body.productDescription,
+          inStock: req.body.inStock,
         });
+        admin
+          .save()
+          .then(() => {
+            console.log("Product saved");
+            res.status(200).json({ message: "Product saved" });
+          })
+          .catch(() => {
+            console.log("An error occured when trying to save the user");
+            res.status(500).json({ message: "Error server" });
+          });
+      }
     }
-  });
+  );
 };
 
-export default signUp;
+export default addProduct;
