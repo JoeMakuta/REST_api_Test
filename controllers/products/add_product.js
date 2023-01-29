@@ -1,4 +1,4 @@
-import ProductModel from "../../models/products/productModel";
+import ProductModel from "../../models/products/productModel.js";
 
 const addProduct = (req, res) => {
   ProductModel.findOne({ productName: req.body.productName }).then(
