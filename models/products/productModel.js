@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema(
   {
-    userName: { type: String, required: true },
-    userEmail: { type: String, required: true },
-    passWord: { type: String, required: true },
+    productName: { type: String, required: true },
+    productId: { type: String, required: true },
+    productDescription: { type: String, required: false },
+    inStock: { type: Boolean, required: true },
   },
   { collection: "product-data" }
 );
