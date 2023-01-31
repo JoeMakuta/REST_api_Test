@@ -5,9 +5,11 @@ const signUpValidation = (data) => {
     userName: Joi.string().required().min(3).max(255),
     userEmail: Joi.string()
       .required()
-      .min(6)
-      .max(255)
-      .pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)),
+      .pattern(
+        new RegExp(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        )
+      ),
     passWord: Joi.string().required().min(6).max(255),
   });
 

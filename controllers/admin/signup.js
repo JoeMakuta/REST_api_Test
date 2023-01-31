@@ -6,7 +6,7 @@ const signUp = (req, res) => {
 
   const validInput = signUpValidation(req.body);
   if (validInput.error) {
-    res.status(400).json({ message: validInput.error.details[0].message });
+    res.status(400).send({ error: validInput.error.details[0].message });
   } else {
     AdminModel.findOne({ userEmail: req.body.userEmail }).then((user) => {
       if (user) {
