@@ -5,24 +5,17 @@ const addProduct = (req, res) => {
     (product) => {
       if (product) {
         console.log("Product exists");
-        res.status(403).json({ message: "Product exists" });
+        res.status(403).json({ message: "Product exists", data: product });
       } else {
         console.log("Product does not exist yet");
-        const admin = new ProductModel({
-          productName: req.body.productName,
-          productId: req.body.productId,
-          productDescription: req.body.productDescription,
-          inStock: req.body.inStock,
-        });
-        admin
-          .save()
-          .then(() => {
+        ProductModel.insertMany(req.body)
+          .then((product) => {
             console.log("Product saved");
-            res.status(200).json({ message: "Product saved" });
+            res.status(200).json({ message: "Product saved", data: product });
           })
-          .catch(() => {
-            console.log("An error occured when trying to save the user");
-            res.status(500).json({ message: "Error server" });
+          .catch((err) => {
+            console.log("An error occured when trying to save the product");
+            res.status(500).json({ message: "Could not save the data", err: err });
           });
       }
     }
