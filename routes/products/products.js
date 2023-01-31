@@ -1,5 +1,6 @@
 import { Router } from "express";
 import addProduct from "../../controllers/products/add_product.js";
+import deleteProduct from "../../controllers/products/delete_product.js";
 import getInStockProducts from "../../controllers/products/get_inStock_products.js";
 import getOneProduct from "../../controllers/products/get_one_product.js";
 import getProducts from "../../controllers/products/get_products.js";
@@ -14,5 +15,6 @@ product_router.get("/get", getProducts);
 product_router.get("/getInStock", getInStockProducts);
 product_router.get("/getOne/:id", getOneProduct);
 product_router.put("/update/:id", updateProduct);
+product_router.delete("/delete/:id", deleteProduct);
 
 export default product_router;
