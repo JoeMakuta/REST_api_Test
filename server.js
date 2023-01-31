@@ -38,6 +38,8 @@ app.use((req, res, next) => {
   next();
 });
 
+//
+
 app.use("/admin", admin_router);
 app.use("/product", product_router);
 
