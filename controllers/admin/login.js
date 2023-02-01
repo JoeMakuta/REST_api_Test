@@ -22,8 +22,10 @@ const login = async (req, res) => {
           bcrypt.compare(req.body.passWord, user.passWord).then((isValid) => {
             if (isValid) {
               //Generate the token
-
+              console.log("Token expires in : ", TOKEN_EXPIRES_IN);
               let token = jwt.sign(
+                //Payload that will be returned when verifying the token
+
                 {
                   id: user._id,
                   userEmail: user.userEmail,
@@ -35,7 +37,6 @@ const login = async (req, res) => {
               );
               res
                 .status(200)
-                .header("auth-token", token)
                 .json({ message: "PassWord is Valid", token: token });
             } else {
               res.status(200).json({ message: "PassWord is not Valid " });
