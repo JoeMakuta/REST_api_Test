@@ -35,6 +35,7 @@ const login = async (req, res) => {
               );
               res
                 .status(200)
+                .header("auth-token", token)
                 .json({ message: "PassWord is Valid", token: token });
             } else {
               res.status(200).json({ message: "PassWord is not Valid " });
