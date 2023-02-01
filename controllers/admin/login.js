@@ -1,7 +1,8 @@
 import validateLogin from "../../validation/login_Validation.js";
 import AdminModel from "../../models/admin/adminModel.js";
+import bcrypt from "bcrypt";
 
-const login = (req, res) => {
+const login = async (req, res) => {
   // Validate inputs
 
   const validLogin = validateLogin(req.body);
@@ -10,13 +11,19 @@ const login = (req, res) => {
   } else {
     //Check if user exist
 
-    const user = AdminModel.findOne({ userEmail: req.body.userEmail })
+    AdminModel.findOne({ userEmail: req.body.userEmail })
       .then((user) => {
         if (user) {
           //Check if password match
-        
-          
-         } else {
+
+          bcrypt.compare(req.body.passWord, user.passWord).then((isValid) => {
+            if (isValid) {
+              res.status(200).json({ message: "PassWord is Valid" });
+            } else {
+              res.status(200).json({ message: "PassWord is not Valid " });
+            }
+          });
+        } else {
           res.status(404).json({ message: "User not found" });
         }
       })
