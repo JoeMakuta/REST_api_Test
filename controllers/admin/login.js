@@ -1,9 +1,12 @@
 import validateLogin from "../../validation/login_Validation.js";
 import AdminModel from "../../models/admin/adminModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const login = async (req, res) => {
   // Validate inputs
+
+  const { TOKEN_SECRET, TOKEN_EXPIRES_IN } = process.env;
 
   const validLogin = validateLogin(req.body);
   if (validLogin.error) {
@@ -18,7 +21,21 @@ const login = async (req, res) => {
 
           bcrypt.compare(req.body.passWord, user.passWord).then((isValid) => {
             if (isValid) {
-              res.status(200).json({ message: "PassWord is Valid" });
+              //Generate the token
+
+              let token = jwt.sign(
+                {
+                  id: user._id,
+                  userEmail: user.userEmail,
+                },
+                TOKEN_SECRET,
+                {
+                  expiresIn: TOKEN_EXPIRES_IN,
+                }
+              );
+              res
+                .status(200)
+                .json({ message: "PassWord is Valid", token: token });
             } else {
               res.status(200).json({ message: "PassWord is not Valid " });
             }
