@@ -10,15 +10,15 @@ import verifyToken from "../../validation/verify_token.js";
 
 const product_router = Router();
 
-product_router.get("/", product_controller);
-product_router.get("/get",verifyToken, getProducts);
-product_router.get("/getInStock", getInStockProducts);
-product_router.get("/getOne/:id", getOneProduct);
+product_router.get("/", verifyToken, product_controller);
+product_router.get("/get", verifyToken, getProducts);
+product_router.get("/getInStock", verifyToken, getInStockProducts);
+product_router.get("/getOne/:id", verifyToken, getOneProduct);
 
-product_router.post("/add", addProduct);
+product_router.post("/add", verifyToken, addProduct);
 
-product_router.put("/update/:id", updateProduct);
+product_router.put("/update/:id", verifyToken, updateProduct);
 
-product_router.delete("/delete/:id", deleteProduct);
+product_router.delete("/delete/:id", verifyToken, deleteProduct);
 
 export default product_router;
