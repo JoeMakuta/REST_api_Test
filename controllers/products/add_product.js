@@ -8,14 +8,19 @@ const addProduct = (req, res) => {
         res.status(403).json({ message: "Product exists", data: product });
       } else {
         console.log("Product does not exist yet");
-        ProductModel.insertMany(req.body)
+
+        const Product = new ProductModel(req.body);
+
+        Product.save()
           .then((product) => {
             console.log("Product saved");
             res.status(200).json({ message: "Product saved", data: product });
           })
           .catch((err) => {
             console.log("An error occured when trying to save the product");
-            res.status(500).json({ message: "Could not save the data", err: err });
+            res
+              .status(500)
+              .json({ message: "Could not save the data", err: err });
           });
       }
     }

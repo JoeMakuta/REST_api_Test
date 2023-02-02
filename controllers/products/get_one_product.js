@@ -2,6 +2,7 @@ import ProductModel from "../../models/products/productModel.js";
 
 const getOneProduct = (req, res) => {
   ProductModel.findById(req.params.id)
+    .populate("postedBy")
     .then((data) => {
       res.status(200).json({
         message: data,
