@@ -5,7 +5,7 @@ const addProduct = (req, res) => {
     (product) => {
       if (product) {
         console.log("Product exists");
-        res.status(403).json({ message: "Product exists", data: product });
+        res.status(403).json({ message: "Product exists" });
       } else {
         console.log("Product does not exist yet");
 
