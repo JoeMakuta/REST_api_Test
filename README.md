@@ -16,7 +16,6 @@ This repo aims at learning the implementation of REST api and to test them using
 - **joi** : Used to validate inputs
 - **jsonwebtoken** : Used to generate the token
 
-3. ****
 ## Testing
 - The API is live [here](https://rest-api-test-dg4c.onrender.com)
 - The Documentation : [restApiTest Documentation](https://documenter.getpostman.com/view/23958716/2s935mr4e2)
