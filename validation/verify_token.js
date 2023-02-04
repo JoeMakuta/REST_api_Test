@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
       next();
     } catch (error) {
       res.status(400).json({
-        error,
+        err: error.message,
       });
     }
   } catch (error) {
