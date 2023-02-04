@@ -14,7 +14,7 @@ const addProduct = (req, res) => {
         Product.save()
           .then((product) => {
             console.log("Product saved");
-            res.status(200).json({ message: "Product saved", data: product });
+            res.status(200).json({ message: "Product saved" });
           })
           .catch((err) => {
             console.log("An error occured when trying to save the product");
